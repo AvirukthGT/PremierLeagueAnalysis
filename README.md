@@ -1,88 +1,82 @@
-The goal of this EDA was to uncover meaningful insights into Premier League player performance, team-level efficiency, and tactical patterns, using a dataset of player statistics.
+# Exploratory Data Analysis of Premier League Player Performance
 
-🧼 Data Cleaning & Preparation
-Loaded and copied the dataset to preserve the original.
+The goal of this EDA was to uncover meaningful insights into Premier League player performance, team-level efficiency, and tactical patterns using a dataset of player statistics.
 
-Handled missing values in Age, BirthYear, and Nationality.
+## Data Cleaning & Preparation
 
-Converted data types (e.g., Age and BirthYear to Int64) for modeling compatibility.
+- Loaded and copied the dataset to preserve the original.
+- Handled missing values in `Age`, `BirthYear`, and `Nationality`.
+- Converted data types (e.g., `Age` and `BirthYear` to `Int64`) for modeling compatibility.
+- Verified data completeness using `.isna().sum()` and `.describe()`.
 
-Verified data completeness via .isna().sum() and .describe().
+## Descriptive Statistics & Visual Insights
 
-📈 Descriptive Statistics & Visual Insights
-Players had skewed distributions in goals and assists — median values near 0, with some outliers.
+- Player distributions for goals and assists were highly skewed — median values were near 0 with several outliers.
+- Per90 statistics showed wide variance, highlighting highly efficient players with minimal minutes.
+- Club-level performance analysis identified top-scoring teams such as Liverpool, Manchester City, and Tottenham.
 
-Per90 stats showed wide variance, revealing highly efficient players with low minutes.
+## Feature Engineering
 
-Club-wise performance analysis identified top-scoring teams (Liverpool, Man City, Tottenham).
+Created new performance and profile metrics:
 
-🛠️ Feature Engineering
-Created metrics like:
+- `GoalConversion` = Goals / xG
+- `AssistEfficiency` = Assists / xAG
+- `AttackingScore` (a weighted performance metric)
+- `AggressionIndex` (to profile disciplinary tendencies)
 
-GoalConversion = Goals / xG
+Other engineered features:
 
-AssistEfficiency = Assists / xAG
+- Positional flags
+- Finishing tiers based on scoring metrics
 
-AttackingScore (weighted performance metric)
+## Correlation Analysis
 
-AggressionIndex (disciplinary profile)
+- Strong positive correlations between goals, assists, and expected goal (xG) metrics.
+- `MinutesPlayed` was nearly perfectly correlated with other time-dependent stats.
+- `GoalConversion` and `AssistEfficiency` were useful for identifying overperformers.
 
-Generated positional flags and finishing tiers.
+## Club-Level Insights
 
-🔥 Correlation Analysis
-Strong correlations between goals, assists, and xG metrics.
+### Over/Underperformance by xG
 
-MinutesPlayed had near-perfect correlation with other time-based stats.
+- **Overperformers**: Nottingham Forest, Wolves
+- **Underperformers**: Crystal Palace, Manchester United
 
-GoalConversion and AssistEfficiency helped identify overperformers.
+### Efficient Player Identification
 
-📊 Club-Level Insights
-Over/Underperformance by xG:
+- Identified high-impact, underutilized players with high Goals/90 despite low total minutes.
 
-Nottingham Forest & Wolves overperformed xG.
+## Tactical Style Clustering
 
-Crystal Palace & Manchester United underperformed.
+Used KMeans clustering on club-level tactical metrics:
 
-Efficient Players:
+- Progressive passes
+- Progressive carries
+- xG difference
 
-Identified underutilized high-impact players with high Goals/90 and low total minutes.
+Identified four tactical profiles:
 
-🧠 Tactical Style Clustering
-Used KMeans to cluster clubs based on:
+1. **High progression teams** – e.g., Liverpool, Arsenal  
+2. **Low progression & underperformance** – e.g., Ipswich Town, Southampton  
+3. **Balanced teams** – e.g., Brighton, West Ham  
+4. **Other tactical variations**
 
-Progressive passes
+## Player Role Archetypes
 
-Progressive carries
+Applied KMeans clustering to group players into attacking role types:
 
-xG difference
+1. Balanced Attackers  
+2. Low Contribution Players  
+3. Support Playmakers  
+4. High Creativity Specialists  
 
-Identified 4 tactical profiles:
+Visualized clusters on scatterplots using Goals vs. Assists per 90 minutes.
 
-High progression (Liverpool, Arsenal)
+## Reliance Analysis
 
-Low progression & underperformance (Ipswich Town, Southampton)
+Calculated reliance on top scorers:
 
-Balanced teams (Brighton, West Ham)
+- Brentford and Crystal Palace: 60–70% of goals from top 3 scorers.
+- Arsenal and Southampton: More evenly distributed goals across the team.
 
-👥 Player Role Archetypes
-Clustered players into 4 attacking role types using KMeans:
-
-Balanced Attackers
-
-Low Contribution Players
-
-Support Playmakers
-
-High Creativity Specialists
-
-Visualized these roles on scatterplots of Goals vs Assists per 90 mins.
-
-⚽ Reliance Analysis
-Calculated how much clubs depend on top 1 and top 3 scorers.
-
-Brentford and Crystal Palace relied on 60–70% of goals from top 3 players.
-
-Arsenal and Southampton had more balanced goal distribution.
-
-Visualized stacked bars of top scorers’ contribution to team goals.
-
+Created stacked bar charts to visualize top scorer contributions to total team goals.
