@@ -80,3 +80,6 @@ Calculated reliance on top scorers:
 - Arsenal and Southampton: More evenly distributed goals across the team.
 
 Created stacked bar charts to visualize top scorer contributions to total team goals.
+
+![image](https://github.com/user-attachments/assets/f50c239f-6394-4bde-a383-e72ac16b9831)
+
